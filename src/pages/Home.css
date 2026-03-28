@@ -57,7 +57,8 @@
 
 .name-gradient {
     font-weight: 800;
-    background: linear-gradient(to right, #fff, var(--primary));
+    /* color: var(--text-color); */
+    background: linear-gradient(to right, var(--text-color), var(--primary));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
