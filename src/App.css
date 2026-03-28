@@ -1,0 +1,20 @@
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-color);
+  padding-top: 70px;
+  color: var(--text-color);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--card-bg); 
+}
+
+section {
+  padding: 80px 20px;
+  background-color: var(--bg-color);
+}

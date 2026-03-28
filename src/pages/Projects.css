@@ -1,0 +1,299 @@
+/* ===== SECTION BASE ===== */
+.projects-section {
+    padding: 100px 20px;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Luxury Gradient Title */
+.premium-title {
+    font-size: clamp(36px, 6vw, 56px);
+    text-align: center;
+    margin-bottom: 70px;
+    font-weight: 800;
+    color: var(--text-color);
+    background: linear-gradient(to bottom, #fff 40%, rgba(255, 255, 255, 0.2));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===== BENTO GRID (Horizontal Slider) ===== */
+.bento-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 40px 0; 
+    width: 100%;
+    cursor: grab;
+    
+    /* Center cards when few, align left when many (Safe Centering) */
+    justify-content: flex-start; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+/* 🔥 THE CENTERING FIX: Invisible Spacers */
+.bento-grid::before,
+.bento-grid::after {
+    content: "";
+    margin: auto;
+}
+
+.bento-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* ===== THE PREMIUM GLASS CARD ===== */
+.premium-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: 28px;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* Glass Edge Highlights */
+    border: 1px solid var(--card-border);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-style: preserve-3d;
+    
+    /* Fixed Dimensions for Slider */
+    width: 380px;
+    min-width: 320px;
+    flex-shrink: 0;
+}
+
+.premium-card:hover {
+    transform: translateY(-12px) rotateX(4deg) rotateY(-2deg);
+    border-color: rgba(var(--primary-rgb), 0.5);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(var(--primary-rgb), 0.2);
+}
+
+/* Internal Glow */
+.premium-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    background: radial-gradient(
+        circle at top left, 
+        rgba(var(--primary-rgb), 0.08), 
+        transparent 60%
+    );
+    pointer-events: none;
+}
+
+.project-tag {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.4);
+}
+
+.premium-card h3 {
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.premium-card p {
+    color: var(--secondary-text);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* TECH PILLS */
+.tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.tech-pills span {
+    padding: 5px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    border-radius: 100px;
+    font-size: 12px;
+    color: #ddd;
+    font-weight: 500;
+}
+
+/* CARD FOOTER */
+.card-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: #fff;
+}
+
+.arrow-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 18px;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.premium-card:hover .arrow-icon {
+    transform: rotate(-45deg) scale(1.1);
+    box-shadow: 0 0 15px var(--primary);
+}
+
+/* ===== MODAL & OVERLAY ===== */
+.premium-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 2000;
+}
+
+.premium-modal {
+    position: fixed;
+    inset: 0;
+    margin: auto; 
+    width: 90%;
+    max-width: 800px;
+    height: fit-content;
+    max-height: 85vh;
+    background: rgba(15, 15, 15, 0.95);
+    border: 1px solid var(--card-border);
+    border-radius: 40px;
+    z-index: 2001;
+    padding: 50px;
+    overflow-y: auto;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+}
+
+.modal-inner h2 {
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.close-premium {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-premium:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+}
+
+/* ===== MODAL CTA BUTTON ===== */
+.modal-actions {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.cta-button {
+    position: relative;
+    padding: 14px 35px;
+    background: var(--primary);
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+/* Premium "Liquid" Hover Effect */
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(var(--primary-rgb), 0.5);
+    background: #fff; /* Shifts to white for a "luxury" highlight */
+}
+
+.cta-button:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+/* Optional: Add an external glow behind the button in the modal */
+.modal-actions::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    width: 150px;
+    height: 50px;
+    background: rgba(var(--primary-rgb), 0.2);
+    filter: blur(40px);
+    z-index: -1;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .bento-grid {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .bento-grid::before, .bento-grid::after {
+        display: none;
+    }
+
+    .premium-card {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .premium-modal {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+        padding: 80px 25px 40px;
+    }
+}

@@ -1,0 +1,238 @@
+/* ===== NAVBAR (FLOATING GLASS) ===== */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  min-width: 60%;
+  max-width: 90%;
+  height: 60px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40px;
+  z-index: 1000;
+  margin-top: 10px;
+
+  /* 3D Glass Effect */
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.2); /* Top highlight for depth */
+  
+  box-shadow:
+    0 10px 30px var(--shadow),
+    0 0 40px rgba(var(--primary-rgb), 0.1);
+  
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden; /* For the shine animation */
+}
+
+/* Glass Shine Animation */
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: 0.7s;
+}
+
+.navbar:hover::before {
+  left: 150%;
+}
+
+.navbar.scrolled {
+  top: 10px;
+  transform: translateX(-50%) scale(0.95);
+  background: var(--card-bg);
+  box-shadow: 0 20px 40px var(--shadow);
+}
+
+/* ===== NAV LINKS ===== */
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-links a {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+/* Floating Bubble Effect */
+.nav-links a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: rgba(var(--primary-rgb), 0.15);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: -1;
+}
+
+.nav-links a:hover::before, 
+.nav-links a.active::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.nav-links a.active {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(var(--primary-rgb), 0.3);
+}
+
+/* ===== 3D TACTILE TOGGLE ===== */
+.nav-right {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.custom-toggle {
+  width: 58px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  padding: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--card-border);
+  
+  /* The "Carved" Hole Effect */
+  box-shadow: 
+    inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.toggle-handle {
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), 
+              width 0.2s ease, background 0.3s ease;
+  
+  /* Physical Button Depth */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+/* Interaction States */
+.custom-toggle.active .toggle-handle {
+  transform: translateX(28px);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.6);
+}
+
+/* Liquid Stretch on Click */
+.custom-toggle:active .toggle-handle {
+  width: 30px;
+}
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+.hamburger {
+  display: none;
+  font-size: 28px; /* Slightly larger for thumb-tapping */
+  cursor: pointer;
+  color: var(--text-color);
+  z-index: 1010; /* Ensure it stays above the glass */
+  user-select: none;
+  padding: 5px;
+}
+
+@media (max-width: 900px) {
+  .navbar { min-width: 90%; }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    overflow: visible !important; /* 🔥 CRITICAL: Allows the dropdown to be seen */
+    width: 95%;
+    min-width: 95%;
+    justify-content: space-between; 
+    padding: 0 20px;
+    left: 50%;
+    transform: translateX(-50%); /* Keeps it centered */
+  }
+
+  /* Ensure scrolled state doesn't break visibility */
+  .navbar.scrolled {
+    overflow: visible !important;
+  }
+  
+  .hamburger { 
+    display: block; 
+  }
+
+  .nav-right { 
+    position: relative; 
+    right: 0; 
+    z-index: 1010;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 75px; /* Distance from the navbar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    
+    /* Start State */
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden; /* This hides it from clicks when closed */
+    
+    flex-direction: column;
+    padding: 20px 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--card-border);
+    border-radius: 25px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 15px 35px var(--shadow);
+  }
+
+  /* 🔥 THE CRITICAL FIX: Add visibility: visible here */
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible; 
+    pointer-events: auto;
+  }
+
+  .nav-links a { 
+    width: 100%; 
+    text-align: center;
+    padding: 15px 0; /* Larger hit area for mobile */
+    display: block;
+  }
+}

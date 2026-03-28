@@ -1,0 +1,162 @@
+/* ===== ROOT (DARK THEME DEFAULT) ===== */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* ===== COLORS ===== */
+  --bg-color: #0f172a;
+  --text-color: #ffffff;
+  --secondary-text: #cbd5f5;
+
+  /* ===== GLASS SYSTEM ===== */
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.2);
+
+  /* ===== PRIMARY ===== */
+  --primary: #38bdf8;
+  --primary-rgb: 56, 189, 248;
+
+  /* ===== BUTTON ===== */
+  --button-bg: #1a1a1a;
+
+  /* ===== SHADOW ===== */
+  --shadow: rgba(0, 0, 0, 0.5);
+
+  /* ===== EXTRA ===== */
+  --blur: blur(20px);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] {
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --secondary-text: #475569;
+
+  /* GLASS */
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(0, 0, 0, 0.08);
+
+  /* PRIMARY */
+  --primary: #25b0eb;
+  --primary-rgb: 37, 99, 235;
+
+  /* BUTTON */
+  --button-bg: #f3f4f6;
+
+  /* SHADOW */
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== HTML ===== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* ===== BODY ===== */
+body {
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--bg-color);
+  color: var(--text-color);
+
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===== LINKS ===== */
+a {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ===== BUTTON ===== */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+
+  font-size: 1em;
+  font-weight: 500;
+
+  background: var(--button-bg);
+  color: var(--text-color);
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  border-color: var(--primary);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* ===== GLOBAL GLASS CLASS (REUSABLE) ===== */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+
+  border: 1px solid var(--card-border);
+
+  box-shadow:
+    0 10px 30px var(--shadow),
+    0 0 30px rgba(var(--primary-rgb), 0.1);
+
+  border-radius: 16px;
+}
+
+/* ===== GLASS HOVER ===== */
+.glass-hover:hover {
+  transform: translateY(-6px) scale(1.02);
+
+  box-shadow:
+    0 20px 50px var(--shadow),
+    0 0 40px rgba(var(--primary-rgb), 0.4);
+}
+
+/* ===== OPTIONAL: GLASS REFLECTION ===== */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+[data-theme="light"] .premium-title {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: var(--primary);
+}

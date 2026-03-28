@@ -1,0 +1,63 @@
+.footer {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Name */
+.footer-name {
+  font-size: 26px;
+  margin-bottom: 6px;
+  color: var(--primary);
+}
+
+/* Subtitle */
+.footer-text {
+  color: var(--secondary-text);
+  margin-bottom: 20px;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Each link */
+.footer-links a {
+  display: flex;              /* IMPORTANT for icon + text */
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Icon size */
+.footer-links svg {
+  font-size: 18px;
+}
+
+/* Hover effect */
+.footer-links a:hover {
+  transform: translateY(-3px);
+  opacity: 0.85;
+}
+
+/* Optional: Brand hover colors 🔥 */
+.footer-links a:hover {
+  color: #0077b5;
+}
+
+/* Copyright */
+.footer-copy {
+  font-size: 13px;
+  color: var(--secondary-text);
+}
