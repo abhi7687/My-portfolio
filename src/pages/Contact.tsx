@@ -1,6 +1,7 @@
 import { Player } from "@lottiefiles/react-lottie-player";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 import "./Contact.css";
 const Contact = () => {
     const email = "abhiramvaitla7687@gmail.com"
@@ -20,38 +21,32 @@ const Contact = () => {
     }, [status]);
 
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        const form = e.currentTarget;
-        const name = (form[0] as HTMLInputElement).value;
-        const email = (form[1] as HTMLInputElement).value;
-        const message = (form[2] as HTMLTextAreaElement).value;
+        const form = e.target;
 
         setStatus("Sending...");
 
         try {
-            const res = await fetch("http://localhost:5000/send", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ name, email, message }),
-            });
+            await emailjs.sendForm(
+                "service_ae6eivp",
+                "template_7rktwvq",
+                form,
+                "2D9IUX4N6ggsXrSpm"
+            );
 
-            if (res.ok) {
-                setStatus("Message Sent Sucessfull ✅");
-                form.reset();
-            } else {
-                setStatus("Failed to send ❌");
-            }
-        } catch (err) {
-            setStatus("Server error ❌");
+            setStatus("Message Sent Successfully ✅");
+            form.reset();
+
+        } catch (error) {
+            console.log(error);
+            setStatus("Failed to send ❌");
         }
-    }
+    };
     return (
         <div className="contact">
-            <motion.h1 
+            <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 className="premium-title"
@@ -78,13 +73,31 @@ const Contact = () => {
                     </p>
 
                     <form className="contact-form" onSubmit={handleSubmit}>
-                        <input type="text" placeholder="Your Name" required />
-                        <input type="email" placeholder="Your Email" required />
-                        <textarea placeholder="Your Message" rows={5} required></textarea>
+                        <input
+                            type="text"
+                            name="from_name"
+                            placeholder="Your Name"
+                            required
+                        />
+
+                        <input
+                            type="email"
+                            name="from_email"
+                            placeholder="Your Email"
+                            required
+                        />
+
+                        <textarea
+                            name="message"
+                            placeholder="Your Message"
+                            rows={5}
+                            required
+                        ></textarea>
 
                         <button type="submit" disabled={status === "Sending..."}>
                             {status === "Sending..." ? "Sending..." : "Send Message"}
                         </button>
+
                         {status && <p className="form-status">{status}</p>}
                     </form>
                 </div>
@@ -100,7 +113,7 @@ const Contact = () => {
                         />
                     </div>
 
-                    
+
                 </div>
             </div>
         </div>
