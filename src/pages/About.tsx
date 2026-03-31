@@ -40,6 +40,8 @@ const About = () => {
                         <li>ETL Pipelines</li>
                         <li>Debugging & Testing</li>
                         <li>Optimization Techniques</li>
+                        <li>OS</li>
+                        <li>Computer Network</li>
                     </ul>
                 </div>
                 {/* Education Section */}
