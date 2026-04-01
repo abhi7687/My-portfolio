@@ -13,7 +13,7 @@ const Projects = () => {
             description: "AI chatbot that predicts disease based on symptoms.",
             details: "Built with FastAPI and Deep Learning to provide instant guidance.",
             tech: ["React", "FastAPI", "Scikit-Learn"],
-            link: "https://github.com/abhi7687/Helth_care_chatbot_using_FNN"
+            github: "https://github.com/abhi7687/Helth_care_chatbot_using_FNN"
         },
         {
             id: 2,
@@ -22,7 +22,7 @@ const Projects = () => {
             description: "Classifies social media ads based on user behavior.",
             details: "Targeting the right audience using demographic behavioral ETL pipelines.",
             tech: ["Python", "Angular", "ML"],
-            link: "https://github.com/abhi7687/social_media_ads"
+            github: "https://github.com/abhi7687/social_media_ads"
         },
         {
             id: 3,
@@ -31,8 +31,18 @@ const Projects = () => {
             description: "A custom CLI tool to efficiently manage tasks directly from the terminal.",
             details: "Developed a fully functional command-line application with modular architecture and JSON-based storage. Implemented features like task creation, updates, deletion, status tracking, and filtering. Converted the project into a global CLI tool using npm link for real-world usability.",
             tech: ["Node.js", "JavaScript", "CLI", "File System"],
-            link: "https://github.com/abhi7687/task-tracker-cli"
+            github: "https://github.com/abhi7687/task-tracker-cli"
         },
+        {
+            id: 4,
+            title: "Smart Weather App",
+            tag: "Full Stack • Real-time",
+            description: "A full-stack weather application that provides real-time weather updates using geolocation, dynamic video backgrounds, and interactive 7-day forecasts.",
+            details: "Built with a focus on user experience, the app automatically detects user location, handles API latency with intelligent loading states, and dynamically updates UI with weather-based animations. Optimized for performance and deployed using modern cloud platforms.",
+            tech: ["React", "Node.js", "Express", "REST API", "Vercel", "Render"],
+            github: "https://github.com/abhi7687/weather-app",
+            link: "https://weather-app-pkf8.vercel.app/"
+        }
     ];
 
     return (
@@ -99,9 +109,14 @@ const Projects = () => {
                                             <p className="large-desc">{project.details}</p>
 
                                             <div className="modal-actions">
-                                                <a href={project.link} target="_blank" className="cta-button">
+                                                <a href={project.github} target="_blank" className="cta-button">
                                                     Source Code
                                                 </a>
+                                                {project.link && (
+                                                    <a href={project.link} target="_blank" className="cta-button">
+                                                        Live Demo
+                                                    </a>
+                                                )}
                                             </div>
                                         </>
                                     ) : null;
