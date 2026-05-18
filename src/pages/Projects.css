@@ -276,18 +276,27 @@
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
     .bento-grid {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
+        display: flex;
+        flex-direction: row;      /* Keep cards side by side */
+        flex-wrap: nowrap;        /* Prevent wrapping */
+        overflow-x: auto;         /* Enable horizontal scroll */
+        overflow-y: hidden;
+        gap: 20px;
+        padding: 20px 10px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
     }
-    
-    .bento-grid::before, .bento-grid::after {
+
+    .bento-grid::before,
+    .bento-grid::after {
         display: none;
     }
 
     .premium-card {
-        width: 100%;
-        min-width: unset;
+        width: 90%;
+        min-width: 90%;
+        flex-shrink: 0;
+        scroll-snap-align: center;
     }
 
     .premium-modal {
